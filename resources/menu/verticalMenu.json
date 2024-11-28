@@ -1,0 +1,72 @@
+{
+    "menu": [
+        {
+            "url": "admin.home",
+            "icon": "fa-solid fa-home",
+            "name": "Inicio",
+            "permissions": ["admin.home"]
+        },
+        {
+            "menuHeader": "APPS & PAGES",
+            "permissions": ["admin.manage.profile", "admin.roles"]
+        },
+        {
+            "name": "Administrar cuentas",
+            "icon": "fa-solid fa-user-gear",
+            "permissions": ["admin.manage.profile"],
+            "submenu": [
+                {
+                    "url": "admin.manage.profile",
+                    "name": "Perfil personal",
+                    "permissions": ["admin.manage.profile"]
+                }
+            ]
+        },
+        {
+            "name": "Seguridad",
+            "icon": "fa-solid fa-unlock-keyhole",
+            "permissions": ["admin.roles"],
+            "submenu": [
+                {
+                    "url": "admin.roles",
+                    "name": "Roles",
+                    "permissions": ["admin.roles"]
+                }
+            ]
+        },
+        {
+            "menuHeader": "FORMS & TABLES",
+            "permissions": ["admin.users", "admin.categories", "admin.products", "admin.supervisor-ppp"]
+        },
+        {
+            "url": "admin.users",
+            "icon": "fa-solid fa-users",
+            "name": "Usuarios",
+            "permissions": ["admin.users"]
+        },
+        {
+            "url": "admin.supervisor-ppp",
+            "icon": "fa-solid fa-users",
+            "name": "Supervisor",
+            "permissions": ["admin.supervisor-ppp"]
+        },
+        {
+            "url": "admin.evaluation.ppp",
+            "icon": "fa-solid fa-users",
+            "name": "Evaluacion",
+            "permissions": ["admin.evaluation.ppp"]
+        },
+        {
+            "name": "PPP",
+            "icon": "fa-solid fa-file-lines",
+            "permissions": ["admin.register-ppp"],
+            "submenu": [
+                {
+                    "url": "admin.register-ppp",
+                    "name": "Registrar",
+                    "permissions": ["admin.register-ppp"]
+                }
+            ]
+        }
+    ]
+}
