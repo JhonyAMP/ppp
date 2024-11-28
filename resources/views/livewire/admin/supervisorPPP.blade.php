@@ -9,7 +9,7 @@
 
     @include('livewire.admin.modal.evaluation')
 
-    @include('livewire.admin.modal.assign-role-user')
+    @include('livewire.admin.modal.assign-supervisor')
 
     @include('livewire.admin.modal.delete')
 

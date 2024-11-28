@@ -8,7 +8,7 @@
                 <div class="flex gap-3 items-center">
 
                     <!-- Expand / collapse button -->
-                    <div class="hidden lg:block 2xl:hidden relative">
+                    <div class="hidden lg:block relative">
 
                         <button class="text-gray-400 hover:text-gray-600 transition-colors" @click="sidebarExpanded = !sidebarExpanded">
                             <span class="sr-only">Expand / collapse sidebar</span>

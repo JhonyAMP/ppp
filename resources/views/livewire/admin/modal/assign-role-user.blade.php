@@ -2,30 +2,37 @@
     <x-dialog-modal wire:model="isOpenAssign" maxWidth="sm">
         <x-slot name="title">
             <i class="fa-solid fa-user-lock mr-2"></i>
-            {{ $isOpenAssign && $supervisor ? 'Actualizar supervisor del estudiante' : 'Asignar supervisor al estudiante' }}
+            {{ $isOpenAssign && $user->roles()->count() > 0 ? 'Actualizar roles del usuario' : 'Asignar roles al usuario' }}
         </x-slot>
         <x-slot name="content">
             <form autocomplete="off">
                 <div class="mb-3 text-center">
-                    <span class="bg-gradient-to-r from-blue-800 to-blue-700 text-white text-sm px-4 py-1 rounded-md">
-                        {{ $user ? $user->name . ' ' . $user->surnames : '' }}
+                    <span class="bg-gradient-to-r from-orange-600 to-yellow-500 text-white text-sm px-4 py-1 rounded-md">
+                        {{ $user ? $user->name .' '. $user->surnames : '' }}
                     </span>
                 </div>
-                <x-app.label value="LISTA DE SUPERVISORES:" class="font-bold my-1" />
-                <div class="flex justify-center items-center">
-                    <div class="px-2">
-                        @foreach ($supervisores as $supervisor)
-                            <div class="flex w-full items-center mb-1">
-                                <label htmlFor="checkbox"
-                                    class="relative flex items-center pr-2 rounded-full cursor-pointer">
-                                    <input wire:model.live="supervisor" type="checkbox" value="{{ $supervisor->id }}"
-                                        class="before:content[''] peer relative h-4 w-4 cursor-pointer appearance-none rounded border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-9 before:w-9 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity focus:ring-0 hover:checked:bg-gray-900 focus:checked:bg-gray-900 checked:border-gray-900 checked:bg-gray-900 checked:before:bg-gray-900 hover:before:opacity-10" />
-                                </label>
-                                <label class="text-sm font-medium text-gray-900">
-                                    {{ $supervisor->name }} {{ $supervisor->surnames }}
-                                </label>
-                            </div>
-                        @endforeach
+                <div class="flex justify-center items-center gap-3">
+                    <div class="w-36 h-36">
+                        <img class="w-full h-full mx-auto border-2 rounded-xl object-cover"
+                            src="{{ $user ? ($user->profile_photo_path ? Storage::url($user->profile_photo_path) : $user->profile_photo_url) : '' }}"
+                            alt="{{ $user ? $user->name : '' }}">
+                    </div>
+                    <div>
+                        <div class="w-full px-2">
+                            <x-label value="LISTA DE ROLES:" class="font-bold mb-1" />
+                            @foreach ($roles as $role)
+                                <div class="flex w-full items-center mb-1">
+                                    <label htmlFor="checkbox"
+                                        class="relative flex items-center pr-2 rounded-full cursor-pointer">
+                                        <input wire:model.live="listRoles" type="checkbox" value="{{ $role->id }}"
+                                            class="before:content[''] peer relative h-4 w-4 cursor-pointer appearance-none rounded border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-9 before:w-9 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity focus:ring-0 hover:checked:bg-gray-900 focus:checked:bg-gray-900 checked:border-gray-900 checked:bg-gray-900 checked:before:bg-gray-900 hover:before:opacity-10" />
+                                    </label>
+                                    <label class="text-sm font-medium text-gray-900">
+                                        {{ $role->name }}
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </form>
@@ -36,12 +43,12 @@
                 Cancelar
             </button>
 
-            <x-button-gradient color="green" wire:click.prevent="asignarSupervisor({{ $user }})"
-                wire:loading.attr="disabled" wire:target="asignarSupervisor">
-                <span wire:loading wire:target="asignarSupervisor" class="mr-2">
+            <x-button-gradient color="green" wire:click.prevent="updateRoleUser({{ $user }})"
+                wire:loading.attr="disabled" wire:target="updateRoleUser">
+                <span wire:loading wire:target="updateRoleUser" class="mr-2">
                     <i class="fa fa-spinner fa-spin"></i>
                 </span>
-                {{ $isOpenAssign && $supervisor ? 'Actualizar' : 'Asignar' }}
+                {{ $isOpenAssign && $user->roles()->count() > 0 ? 'Actualizar' : 'Asignar' }}
             </x-button-gradient>
         </x-slot>
 
